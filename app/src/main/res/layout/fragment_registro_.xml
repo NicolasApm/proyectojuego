@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FragmentRegistro"
+    tools:context=".view.Registro">
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+
+            <EditText
+                android:id="@+id/txtnomusu"
+                style="@style/FormatoRegistro"
+                android:layout_marginHorizontal="30dp"
+
+                android:hint="@string/texto_InNombre" />
+
+            <EditText
+                android:id="@+id/txtciudadusu"
+                style="@style/FormatoRegistro"
+                android:layout_marginHorizontal="30dp"
+
+                android:hint="@string/texto_InApellido" />
+
+            <EditText
+                android:id="@+id/txtedadusu"
+
+                android:layout_marginHorizontal="30dp"
+
+                style="@style/FormatoRegistro"
+                android:hint="@string/texto_InEdad"/>
+
+            <Button
+                android:id="@+id/RegistroUsu"
+                style="@style/TeclaNum"
+                android:layout_marginHorizontal="80dp"
+                android:layout_marginVertical="30dp"
+                android:text="@string/texto_Registrar">
+
+            </Button>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

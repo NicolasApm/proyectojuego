@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">UCC Application</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_dashboard">Registrar</string>
+    <string name="title_notifications">Iniciar</string>
+    <string name="texto_Registrar">Registrar</string>
+    <string name="texto_InNombre">Ingrese Nombre</string>
+    <string name="texto_InApellido">Ingrese Apellido</string>
+    <string name="texto_InEdad">Ingrese Edad</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
