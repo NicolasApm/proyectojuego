@@ -15,8 +15,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.myapplication.R;
+import com.example.android.myapplication.presenter.ConectarBluetoothImp;
 
 import java.util.Set;
 
@@ -154,8 +156,9 @@ public class ListaDispositivos extends Fragment {
 
             // Realiza un intent para iniciar la siguiente actividad
             // mientras toma un EXTRA_DEVICE_ADDRESS que es la dirección MAC.
+            Intent j = new Intent(getActivity(), ConectarBluetoothImp.class);
+            j.putExtra(EXTRA_DEVICE_ADDRESS, address);
             Intent i = new Intent(getActivity(), UserInterfaz.class);//<-<- PARTE A MODIFICAR >->->
-            i.putExtra(EXTRA_DEVICE_ADDRESS, address);
             startActivity(i);
 
         }
@@ -170,7 +173,7 @@ public class ListaDispositivos extends Fragment {
         // Comprueba que el dispositivo tiene Bluetooth y que está encendido.
         mBtAdapter= BluetoothAdapter.getDefaultAdapter();
         if(mBtAdapter==null) {
-            // Toast.makeText(getBaseContext(), "El dispositivo no soporta Bluetooth", Toast.LENGTH_SHORT).show();
+             Toast.makeText(getActivity(), "El dispositivo no soporta Bluetooth", Toast.LENGTH_SHORT).show();
         } else {
             if (mBtAdapter.isEnabled()) {
                 Log.d(TAG, "...Bluetooth Activado...");
@@ -199,6 +202,4 @@ public class ListaDispositivos extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
 }
