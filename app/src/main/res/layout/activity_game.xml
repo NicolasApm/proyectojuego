@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="4"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="50dp"
     tools:context=".view.GameActivity">
 
     <LinearLayout
@@ -19,24 +21,27 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/colorAccent" />
+            style="@style/TeclaRedondo"/>
 
         <Button
             android:id="@+id/btn12"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
 
         <Button
             android:id="@+id/btn13"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
         <Button
             android:id="@+id/btn14"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,24 +53,28 @@
             android:id="@+id/btn21"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
 
         <Button
             android:id="@+id/btn22"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
 
         <Button
             android:id="@+id/btn23"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
         <Button
             android:id="@+id/btn24"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -77,24 +86,28 @@
             android:id="@+id/btn31"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
 
         <Button
             android:id="@+id/btn32"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
 
         <Button
             android:id="@+id/btn33"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
         <Button
             android:id="@+id/btn34"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,24 +119,27 @@
             android:id="@+id/btn41"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
 
         <Button
             android:id="@+id/btn42"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
 
         <Button
             android:id="@+id/btn43"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
         <Button
             android:id="@+id/btn44"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/TeclaRedondo"/>
     </LinearLayout>
-
-</LinearLayout>
+ </LinearLayout>

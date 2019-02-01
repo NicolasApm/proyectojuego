@@ -11,18 +11,23 @@
     <color name="xdefecto1">#800033FF</color>
     <color name="xdefecto2">#8000FF33</color>
     <color name="xdefecto3">#80FFFF00</color>
-    <color name="xdefecto4">#80FF3300</color>
-    <color name="fondo_toast_error">#ffff1411</color>
-    <color name="borde_toast_error">#ff141177</color>
-    <color name="fondo_toast_advertencia">#ffffbf1d</color>
+    <color name="RojoSangre">#80FF3300</color>
+    <color name="Rojo">#ffff1411</color>
+    <color name="Azul">#ff141177</color>
+    <color name="Amarillo_oscuro">#ffffbf1d</color>
+    <color name="Amarillo_Claro">#d8ff28</color>
     <color name="borde_toast_advertencia">#ff141177</color>
-    <color name="fondo_toast_ok">#ff9ACD32</color>
-    <color name="borde_toast_ok">#ffffffff</color>
+    <color name="Verde_Claro2">#ff9ACD32</color>
+    <color name="Blanco">#ffffffff</color>
     <color name="texto_toast_ok">#00115377</color>
     <color name="fondo_toast_informacion">#ff141177</color>
-    <color name="borde_toast_informacion">#25c643</color>
+    <color name="Verde_Claro">#25c643</color>
     <color name="button_normal">#ff141177</color>
-    <color name="button_pressed">#7c7d7c</color>
+    <color name="Gris">#7c7d7c</color>
     <color name="dialog_divider">#ff141177</color>
+    <color name="Violeta">#9f0e96</color>
+    <color name="Naranja">#ff9514</color>
+    <color name="Azul_Claro">#3c9ef4</color>
+    <color name="Verde_Oscuro">#025824</color>
 
 </resources>

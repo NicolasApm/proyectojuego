@@ -1,9 +1,8 @@
 package com.example.android.myapplication.view;
 
 
-public interface ConectarBluetooth {
+public interface FallaConnected {
 
-    void RecibirDatos();
-    void ConectarSocket();
-    void cerrarSocket();
+    void DataWrite(String DataWrite);
+
 }

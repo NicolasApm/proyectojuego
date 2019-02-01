@@ -1,13 +1,11 @@
 package com.example.android.myapplication.view;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,31 +16,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.myapplication.R;
-import com.example.android.myapplication.presenter.ConectarBluetoothImp;
+import com.example.android.myapplication.presenter.ListaDispositivosPresenter;
+import com.example.android.myapplication.presenter.ListaDispositivosPresenterImpl;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ListaDispositivos.OnFragmentInteractionListener} interface
+ * {@link ListaDispositivosFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ListaDispositivos#newInstance} factory method to
+ * Use the {@link ListaDispositivosFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListaDispositivos extends Fragment {
+public class ListaDispositivosFragment extends Fragment implements ListaDispositivosView{
 
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    String mensaje="";
-
-    private OnFragmentInteractionListener mListener;
     //1)
     // Depuración de LOGCAT
     private static final String TAG = "DispositivosBT"; //<-<- PARTE A MODIFICAR >->->
@@ -52,11 +40,13 @@ public class ListaDispositivos extends Fragment {
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
     // Declaracion de campos
-    private BluetoothAdapter mBtAdapter;
+    //private BluetoothAdapter mBtAdapter;
     private ArrayAdapter mPairedDevicesArrayAdapter;
+    private OnFragmentInteractionListener mListener;
+    private ListaDispositivosPresenter presenter;
 
 
-    public ListaDispositivos() {
+    public ListaDispositivosFragment() {
         // Required empty public constructor
     }
 
@@ -69,26 +59,34 @@ public class ListaDispositivos extends Fragment {
      * @return A new instance of fragment Green_Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ListaDispositivos newInstance(String param1, String param2) {
-        ListaDispositivos fragment = new ListaDispositivos();
-        Bundle args = new Bundle();
+    public static ListaDispositivosFragment newInstance() {
+        ListaDispositivosFragment fragment = new ListaDispositivosFragment();
+        /*Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.setArguments(args);*/
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        presenter = new ListaDispositivosPresenterImpl(this);
+        /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
 
 
         }
+*/
 
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
+        presenter = null;
     }
 
     @Override
@@ -97,7 +95,10 @@ public class ListaDispositivos extends Fragment {
         // Inflate the layout for this fragment
 
 
-        return inflater.inflate(R.layout.fragment_listadispositivos, container, false);
+        View v = inflater.inflate(R.layout.fragment_listadispositivos, container, false);
+        IdLista = (ListView)v.findViewById(R.id.IdLista);
+        initRecyclerView();
+        return  v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -119,33 +120,17 @@ public class ListaDispositivos extends Fragment {
     }
 
     public void onResume () {
-
-
         super.onResume();
+        presenter.onResume();
+    }
 
-        //---------------------------------
-        VerificarEstadoBT();
-
+    private void initRecyclerView(){
         // Inicializa la array que contendra la lista de los dispositivos bluetooth vinculados
-
-        mPairedDevicesArrayAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.nombre_dispositivos);
-        //listView.setAdapter(adapter);
+        mPairedDevicesArrayAdapter = new ArrayAdapter<String>(getActivity(),R.layout.nombre_dispositivos);
 
         // Presenta los disposisitivos vinculados en el ListView
-        IdLista = (ListView)getActivity().findViewById(R.id.IdLista);
         IdLista.setAdapter(mPairedDevicesArrayAdapter);
         IdLista.setOnItemClickListener(mDeviceClickListener);
-        // Obtiene el adaptador local Bluetooth adapter
-        mBtAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
-        // Adiciona un dispositivos previo emparejado al array
-        if (pairedDevices.size() > 0)
-        {
-            for (BluetoothDevice device : pairedDevices) { //EN CASO DE ERROR LEER LA ANTERIOR EXPLICACION
-                mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-            }
-        }
     }
 
     private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
@@ -156,11 +141,10 @@ public class ListaDispositivos extends Fragment {
 
             // Realiza un intent para iniciar la siguiente actividad
             // mientras toma un EXTRA_DEVICE_ADDRESS que es la dirección MAC.
-            Intent j = new Intent(getActivity(), ConectarBluetoothImp.class);
+            Intent j = new Intent(getActivity(), ConectarBluetoothActivity.class);
             j.putExtra(EXTRA_DEVICE_ADDRESS, address);
-            Intent i = new Intent(getActivity(), UserInterfaz.class);//<-<- PARTE A MODIFICAR >->->
-            startActivity(i);
-
+            //Intent i = new Intent(getActivity(), UserInterfaz.class);//<-<- PARTE A MODIFICAR >->->
+            startActivity(j);
         }
     };
     @Override
@@ -169,23 +153,25 @@ public class ListaDispositivos extends Fragment {
         mListener = null;
     }
 
-    private void VerificarEstadoBT() {
-        // Comprueba que el dispositivo tiene Bluetooth y que está encendido.
-        mBtAdapter= BluetoothAdapter.getDefaultAdapter();
-        if(mBtAdapter==null) {
-             Toast.makeText(getActivity(), "El dispositivo no soporta Bluetooth", Toast.LENGTH_SHORT).show();
-        } else {
-            if (mBtAdapter.isEnabled()) {
-                Log.d(TAG, "...Bluetooth Activado...");
-            } else {
-                //Solicita al usuario que active Bluetooth
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, 1);
-
-            }
-        }
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void askEnableBT() {
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivityForResult(enableBtIntent, 1);
+    }
+
+    @Override
+    public void setData(List<String> data) {
+        mPairedDevicesArrayAdapter.clear();
+        for (String d: data) {
+            mPairedDevicesArrayAdapter.add(d);
+        }
+        mPairedDevicesArrayAdapter.notifyDataSetChanged();
+    }
 
 
     /**

@@ -11,15 +11,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            >
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/txtnomusu"
                 style="@style/FormatoRegistro"
                 android:layout_marginHorizontal="30dp"
-
                 android:hint="@string/texto_InNombre" />
 
             <EditText
@@ -31,20 +28,59 @@
 
             <EditText
                 android:id="@+id/txtedadusu"
-
                 android:layout_marginHorizontal="30dp"
-
                 style="@style/FormatoRegistro"
                 android:hint="@string/texto_InEdad"/>
 
             <Button
-                android:id="@+id/RegistroUsu"
-                style="@style/TeclaNum"
-                android:layout_marginHorizontal="80dp"
-                android:layout_marginVertical="30dp"
-                android:text="@string/texto_Registrar">
+            android:id="@+id/RegistroUsu"
 
-            </Button>
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginVertical="30dp"
+            android:text="@string/texto_Registrar"
+            style="@style/TeclaNum"></Button>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/pruebaNivel"
+                    style="@style/TeclaNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="nive1"></Button>
+
+                <Button
+                    android:id="@+id/pruebaNive2"
+                    style="@style/TeclaNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="nive2"></Button>
+
+                <Button
+                    android:id="@+id/pruebaNive3"
+                    style="@style/TeclaNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="nive3"></Button>
+
+                <Button
+                    android:id="@+id/PruebaNive4"
+                    style="@style/TeclaNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="nive4"></Button>
+            </LinearLayout>
+            <Button
+                android:id="@+id/PruebaNive5"
+                style="@style/TeclaNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nivel5"></Button>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

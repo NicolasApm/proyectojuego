@@ -4,8 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.QuickContactBadge;
-import android.widget.Toast;
 
 import com.example.android.myapplication.R;
 import com.example.android.myapplication.common.EBotones;
@@ -16,9 +14,8 @@ import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class GameActivity extends AppCompatActivity implements GameView {
+public class GameActivity extends AppCompatActivity implements GameView{
 
     public static final String SEQUENCE = "SEQ";
 
@@ -60,7 +57,8 @@ public class GameActivity extends AppCompatActivity implements GameView {
 
     private GamePresenter presenter;
 
-    private View.OnClickListener clickbutton = new View.OnClickListener() {
+    //Funcion para oprimir botones y saber posicion
+   /* private View.OnClickListener clickbutton = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             EBotones[] btns = EBotones.values();
@@ -70,19 +68,21 @@ public class GameActivity extends AppCompatActivity implements GameView {
                 }
             }
         }
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        //Para implementar botones en el layout
         ButterKnife.bind(this);
-        configOnClick();
+       // configOnClick();
         //leer los extras
         String data = getIntent().getStringExtra(SEQUENCE);
         GameSequence gs = new Gson().fromJson(data, GameSequence.class);
 
         presenter = new GamePresenterImpl(this, gs);
+
     }
 
     @Override
@@ -90,35 +90,53 @@ public class GameActivity extends AppCompatActivity implements GameView {
         super.onResume();
         presenter.start();
     }
-
-    private void configOnClick() {
-        btn11.setOnClickListener(clickbutton);
-        btn12.setOnClickListener(clickbutton);
-        btn13.setOnClickListener(clickbutton);
-        btn14.setOnClickListener(clickbutton);
-
-        btn21.setOnClickListener(clickbutton);
-        btn22.setOnClickListener(clickbutton);
-        btn23.setOnClickListener(clickbutton);
-        btn24.setOnClickListener(clickbutton);
-
-        btn31.setOnClickListener(clickbutton);
-        btn32.setOnClickListener(clickbutton);
-        btn33.setOnClickListener(clickbutton);
-        btn34.setOnClickListener(clickbutton);
-
-        btn41.setOnClickListener(clickbutton);
-        btn42.setOnClickListener(clickbutton);
-        btn43.setOnClickListener(clickbutton);
-        btn44.setOnClickListener(clickbutton);
+   //Apagar boton por boton
+    public void offButton (EBotones btn) {
+    // getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
     }
 
+    @Override
+    //Apagar todos los botones
+    public void Borrar(String borrar) {
+        if (borrar == "BorrarBotones") {
+            getButtonFromEnum(EBotones.BUTTON11).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON12).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON13).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON14).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON21).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON22).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON23).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON24).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON31).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON32).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON33).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON34).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON41).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON42).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON43).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+            getButtonFromEnum(EBotones.BUTTON44).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+
+        }
+    }
+    //Encender los botones
+    @Override
     public void onButton(EBotones btn) {
-        getButtonFromEnum(btn).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-    }
-
-    public void offButton(EBotones btn) {
-        getButtonFromEnum(btn).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        if (btn==EBotones.BUTTON11){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo11));}
+        if (btn==EBotones.BUTTON12){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo12));}
+        if (btn==EBotones.BUTTON13){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo13));}
+        if (btn==EBotones.BUTTON14){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo14));}
+        if (btn==EBotones.BUTTON21){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo21));}
+        if (btn==EBotones.BUTTON22){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo22));}
+        if (btn==EBotones.BUTTON23){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo23));}
+        if (btn==EBotones.BUTTON24){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo24));}
+        if (btn==EBotones.BUTTON31){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo31));}
+        if (btn==EBotones.BUTTON32){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo32));}
+        if (btn==EBotones.BUTTON33){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo33));}
+        if (btn==EBotones.BUTTON34){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo34));}
+        if (btn==EBotones.BUTTON41){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo41));}
+        if (btn==EBotones.BUTTON42){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo42));}
+        if (btn==EBotones.BUTTON43){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo43));}
+        if (btn==EBotones.BUTTON44){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo44));}
     }
 
     Button getButtonFromEnum(EBotones btn) {
@@ -158,5 +176,4 @@ public class GameActivity extends AppCompatActivity implements GameView {
                 return btn44;
         }
     }
-
 }

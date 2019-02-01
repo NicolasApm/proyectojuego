@@ -14,12 +14,11 @@ import android.widget.EditText;
 import com.example.android.myapplication.R;
 import com.example.android.myapplication.common.EBotones;
 import com.example.android.myapplication.model.GameSequence;
+import com.example.android.myapplication.model.SecuenciaNiv5;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import OpenHelper.Sqlite_OpenHelper;
 
 
 /**
@@ -30,14 +29,17 @@ import OpenHelper.Sqlite_OpenHelper;
  * Use the {@link Registro#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Registro extends Fragment  {
+public class Registro extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    Button btnGrabarUsu;
-    EditText txtNomusu,txtApellidousu,txtEdadusu;
-
+    private Button btnGrabarUsu,btnPrueba1,btnPrueba2,btnPrueba3,btnPrueba4,btnPrueba5;
+    public EditText txtNomusu,txtApellidousu,txtEdadusu;
+    public Intent i;
+    private List<EBotones> sequence = new ArrayList<>();
+    private SecuenciaNiv5 secuenciaNiv5=new SecuenciaNiv5(sequence);
+   // secuenciaNiv5 = new SecuenciaNiv5(sequence);
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -68,6 +70,7 @@ public class Registro extends Fragment  {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         }
 
@@ -80,7 +83,7 @@ public class Registro extends Fragment  {
         txtNomusu=(rootView.findViewById(R.id.txtnomusu));
         txtApellidousu=(rootView.findViewById(R.id.txtciudadusu));
         txtEdadusu=(rootView.findViewById(R.id.txtedadusu));
-
+        i = new Intent(getActivity(), GameActivity.class);
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -93,33 +96,8 @@ public class Registro extends Fragment  {
         btnGrabarUsu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), GameActivity.class);
 
-                List<EBotones> sequence = new ArrayList<>();
-                sequence.add(EBotones.BUTTON22);
-                sequence.add(EBotones.BUTTON23);
-                sequence.add(EBotones.BUTTON32);
-                sequence.add(EBotones.BUTTON33);
-
-                List<EBotones> sequence2 = new ArrayList<>();
-                sequence2.add(EBotones.BUTTON11);
-                sequence2.add(EBotones.BUTTON22);
-                sequence2.add(EBotones.BUTTON33);
-                sequence2.add(EBotones.BUTTON44);
-                sequence2.add(EBotones.BUTTON14);
-                sequence2.add(EBotones.BUTTON23);
-                sequence2.add(EBotones.BUTTON32);
-                sequence2.add(EBotones.BUTTON41);
-
-                GameSequence seq = new GameSequence();
-                seq.setSequence(sequence2);
-
-                String tx = new Gson().toJson(seq);
-
-                i.putExtra(GameActivity.SEQUENCE, tx);
-                startActivity(i);
-
-/*
+                /*
                 Sqlite_OpenHelper helper=new Sqlite_OpenHelper(getActivity(),"usuario",null,1);
                 helper.abrirdb();
                 helper.insertarReg(String.valueOf(txtNomusu.getText()),
@@ -130,7 +108,47 @@ public class Registro extends Fragment  {
             }
         });
 
+        btnPrueba1=getActivity().findViewById(R.id.pruebaNivel);
+        btnPrueba1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                secuenciaNiv5.PrimeraSec();
+                CallGame();
+                sequence.clear();
+            }
+        });
+        btnPrueba2=getActivity().findViewById(R.id.pruebaNive2);
+        btnPrueba2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                secuenciaNiv5.SegundaSec();
+                CallGame();
+                sequence.clear();
+            }
+        });
+        btnPrueba3=getActivity().findViewById(R.id.pruebaNive3);
+        btnPrueba3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                secuenciaNiv5.TerceraSec();
+                CallGame();
+                sequence.clear();
+            }
+        });
+
+        btnPrueba4=getActivity().findViewById(R.id.PruebaNive4);
+        btnPrueba4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                secuenciaNiv5.CuartaSec();
+                CallGame();
+                sequence.clear();
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -157,6 +175,16 @@ public class Registro extends Fragment  {
         mListener = null;
     }
 
+    public  void CallGame(){
+
+        GameSequence seq = new GameSequence();
+        seq.setSequence(sequence);
+
+        String tx = new Gson().toJson(seq);
+
+        i.putExtra(GameActivity.SEQUENCE, tx);
+        startActivity(i);
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

@@ -19,11 +19,9 @@ public enum EBotones {
     BUTTON44("44");
 
     private String id;
-
     EBotones(String id) {
         this.id = id;
     }
-
     public String getId() {
         return this.id;
     }

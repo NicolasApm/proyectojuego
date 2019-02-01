@@ -14,13 +14,13 @@ import com.example.android.myapplication.R;
 public class MainActivity extends AppCompatActivity implements
         Registro.OnFragmentInteractionListener,
         MenuUcc.OnFragmentInteractionListener,
-        ListaDispositivos.OnFragmentInteractionListener
+        ListaDispositivosFragment.OnFragmentInteractionListener
 {
 
     private TextView mTextMessage;
     Registro registro;
     MenuUcc menuUcc;
-    ListaDispositivos listaDispositivos;
+    ListaDispositivosFragment listaDispositivosFragment;
 
        @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements
 
                 case R.id.navigation_notifications:
 
-                    listaDispositivos=new ListaDispositivos();
-                    fragmentTransaction.replace(R.id.ContenedorFragmentos,listaDispositivos);
+                    listaDispositivosFragment = ListaDispositivosFragment.newInstance();
+                    fragmentTransaction.replace(R.id.ContenedorFragmentos, listaDispositivosFragment);
                     fragmentTransaction.commit();
                     return true;
             }

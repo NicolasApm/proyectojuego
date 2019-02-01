@@ -3,9 +3,13 @@ package com.example.android.myapplication.view;
 
 import android.bluetooth.BluetoothSocket;
 
-public interface ConectarBluetooth {
+public interface ConectarBluetoothView {
 
-    void RecibirDatos();
-    void ConectarSocket( );
-    void cerrarSocket( );
+    void showData(String data);
+
+    void showMessage(String message);
+
+    void RunOnMain(Runnable action);
+
+    void finish();
 }

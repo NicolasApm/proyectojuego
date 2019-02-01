@@ -14,4 +14,6 @@ public class GameSequence {
     public void setSequence(List<EBotones> sequence) {
         this.sequence = sequence;
     }
+
+
 }
