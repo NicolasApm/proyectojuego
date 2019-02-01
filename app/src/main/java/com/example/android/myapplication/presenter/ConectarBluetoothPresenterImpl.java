@@ -32,6 +32,9 @@ public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresente
         }
     }
 
+    /**
+     * encender
+     */
     @Override
     public void encender() {
         btUtil.write("1");
