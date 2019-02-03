@@ -13,7 +13,10 @@ import android.widget.EditText;
 
 import com.example.android.myapplication.R;
 import com.example.android.myapplication.common.EBotones;
+import com.example.android.myapplication.common.ENnum;
+import com.example.android.myapplication.model.GameNumSequence;
 import com.example.android.myapplication.model.GameSequence;
+import com.example.android.myapplication.model.Niv6_7Secuence;
 import com.example.android.myapplication.model.SecuenciaNiv5;
 import com.google.gson.Gson;
 
@@ -34,12 +37,15 @@ public class Registro extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private Button btnGrabarUsu,btnPrueba1,btnPrueba2,btnPrueba3,btnPrueba4,btnPrueba5;
-    public EditText txtNomusu,txtApellidousu,txtEdadusu;
-    public Intent i;
+    private Button btnGrabarUsu, btnPrueba1, btnPrueba2, btnPrueba3, btnPrueba4, btnPrueba5;
+    Intent i,j;
+    public EditText txtNomusu, txtApellidousu, txtEdadusu;
     private List<EBotones> sequence = new ArrayList<>();
-    private SecuenciaNiv5 secuenciaNiv5=new SecuenciaNiv5(sequence);
-   // secuenciaNiv5 = new SecuenciaNiv5(sequence);
+    private SecuenciaNiv5 secuenciaNiv5 = new SecuenciaNiv5(sequence);
+    private List<ENnum> sequence2 = new ArrayList<>();
+    private Niv6_7Secuence secuenciaNiv67 =new Niv6_7Secuence(sequence2);
+
+    // secuenciaNiv5 = new SecuenciaNiv5(sequence);
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -72,27 +78,28 @@ public class Registro extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView= inflater.inflate(R.layout.fragment_registro_, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_registro_, container, false);
 
-        txtNomusu=(rootView.findViewById(R.id.txtnomusu));
-        txtApellidousu=(rootView.findViewById(R.id.txtciudadusu));
-        txtEdadusu=(rootView.findViewById(R.id.txtedadusu));
+        txtNomusu = (rootView.findViewById(R.id.txtnomusu));
+        txtApellidousu = (rootView.findViewById(R.id.txtciudadusu));
+        txtEdadusu = (rootView.findViewById(R.id.txtedadusu));
         i = new Intent(getActivity(), GameActivity.class);
+        j = new Intent(getActivity(), GameSecNumActivity.class);
         // Inflate the layout for this fragment
         return rootView;
     }
 
-    public void onActivityCreated (Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
 
-        btnGrabarUsu=(Button)getActivity().findViewById(R.id.RegistroUsu);
+        btnGrabarUsu = (Button) getActivity().findViewById(R.id.RegistroUsu);
         btnGrabarUsu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +115,7 @@ public class Registro extends Fragment {
             }
         });
 
-        btnPrueba1=getActivity().findViewById(R.id.pruebaNivel);
+        btnPrueba1 = getActivity().findViewById(R.id.pruebaNivel);
         btnPrueba1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +125,7 @@ public class Registro extends Fragment {
                 sequence.clear();
             }
         });
-        btnPrueba2=getActivity().findViewById(R.id.pruebaNive2);
+        btnPrueba2 = getActivity().findViewById(R.id.pruebaNive2);
         btnPrueba2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +135,7 @@ public class Registro extends Fragment {
                 sequence.clear();
             }
         });
-        btnPrueba3=getActivity().findViewById(R.id.pruebaNive3);
+        btnPrueba3 = getActivity().findViewById(R.id.pruebaNive3);
         btnPrueba3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +146,7 @@ public class Registro extends Fragment {
             }
         });
 
-        btnPrueba4=getActivity().findViewById(R.id.PruebaNive4);
+        btnPrueba4 = getActivity().findViewById(R.id.PruebaNive4);
         btnPrueba4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,7 +156,19 @@ public class Registro extends Fragment {
                 sequence.clear();
             }
         });
+
+        btnPrueba5 = getActivity().findViewById(R.id.PruebaNive5);
+        btnPrueba5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                secuenciaNiv67.PrimeraSec();
+                CallGame2();
+                sequence2.clear();
+            }
+        });
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -175,7 +194,7 @@ public class Registro extends Fragment {
         mListener = null;
     }
 
-    public  void CallGame(){
+    public void CallGame() {
 
         GameSequence seq = new GameSequence();
         seq.setSequence(sequence);
@@ -185,6 +204,18 @@ public class Registro extends Fragment {
         i.putExtra(GameActivity.SEQUENCE, tx);
         startActivity(i);
     }
+
+    public void CallGame2() {
+
+        GameNumSequence seq = new GameNumSequence();
+        seq.setSequence(sequence2);
+
+        String tx = new Gson().toJson(seq);
+
+        j.putExtra(GameSecNumActivity.SEQUENCE, tx);
+        startActivity(j);
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".view.GameActivity"></activity>
         <activity android:name=".view.ConectarBluetoothActivity"></activity>
+        <activity android:name=".view.GameSecNumActivity"></activity>
 
     </application>
 

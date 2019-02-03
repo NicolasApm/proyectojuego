@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/ContenedorNiv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:shrinkColumns="*"
+        android:stretchColumns="*"
+        tools:context=".view.GameSecNumActivity">
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/Txtv11"
+                android:textAlignment="center"
+                android:textSize="90sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/Txtv12"
+                android:textAlignment="center"
+                android:textSize="90sp"
+                android:textStyle="bold"></TextView>
+
+
+            <TextView
+                android:id="@+id/Txtv13"
+                android:textAlignment="center"
+                android:textSize="90sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/Txtv14"
+                android:textAlignment="center"
+                android:textSize="90sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/Txtv21"
+                android:textAlignment="center"
+                android:textSize="90sp"
+                android:textStyle="bold"></TextView>
+
+
+            <TextView
+                android:id="@+id/Txtv22"
+                android:textAlignment="center"
+                android:textSize="90sp"
+                android:textStyle="bold"></TextView>
+
+
+            <TextView
+                android:id="@+id/Txtv23"
+                android:textAlignment="center"
+                android:textSize="90sp"
+                android:textStyle="bold"></TextView>
+
+
+            <TextView
+                android:id="@+id/Txtv24"
+                android:textAlignment="center"
+                android:textSize="90sp"
+                android:textStyle="bold"></TextView>
+
+        </TableRow>
+    </TableLayout>
+</FrameLayout>

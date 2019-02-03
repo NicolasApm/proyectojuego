@@ -66,9 +66,8 @@ public class BTUtil {
         }
     }
 
+
     /**
-     * Consulta los dispositivos activos
-     *
      * @return
      */
     public Set<BluetoothDevice> getDevices() {

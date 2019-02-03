@@ -1,13 +1,8 @@
 package com.example.android.myapplication.presenter;
 
-import android.bluetooth.BluetoothDevice;
-
 import com.example.android.myapplication.devices.BTCallback;
 import com.example.android.myapplication.devices.BTUtil;
-import com.example.android.myapplication.view.ConectarBluetoothActivity;
 import com.example.android.myapplication.view.ConectarBluetoothView;
-
-import java.io.IOException;
 
 public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresenter, BTCallback {
     private ConectarBluetoothView view;
@@ -28,7 +23,7 @@ public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresente
                 throw new Exception("BT desactivado");
             btUtil.connect(address, this);
         } catch (Exception e) {
-            view.showMessage(e.getMessage());
+            view.showMessage("No hay dispotivo conectado");
         }
     }
 

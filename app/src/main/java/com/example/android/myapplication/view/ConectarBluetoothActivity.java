@@ -22,6 +22,7 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
     //1)
     @BindView(R.id.IdBufferIn)
     TextView IdBufferIn;
+    String data;
     //-------------------------------------------
     private ConectarBluetoothPresenter presenter;
 
@@ -41,6 +42,8 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
     protected void onResume() {
         super.onResume();
         presenter.onResume();
+
+
     }
 
     @OnClick(R.id.IdEncender)
@@ -60,8 +63,20 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
 
     @Override
     public void showData(String data) {
-        IdBufferIn.setText("Dato: " + data);//<-<- PARTE A MODIFICAR >->->
+        //this.data=data;
+        //IdBufferIn.setText("Dato: " + data);//<-<- PARTE A MODIFICAR >->->
+
+        if (data.equals("LED ENCENDIDO")){
+
+             IdBufferIn.setText("Dato: " + "inciaLed");
+        }
+        else if(data.equals("LED APAGADO")){
+
+            IdBufferIn.setText("Dato: " + "OFFLed");
+        }
     }
+
+
 
     @Override
     public void showMessage(String message) {
