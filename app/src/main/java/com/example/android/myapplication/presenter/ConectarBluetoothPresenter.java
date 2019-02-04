@@ -7,4 +7,8 @@ public interface ConectarBluetoothPresenter {
     void apagar();
 
     void desconectar();
+
+   void OnPause();
+
+
 }

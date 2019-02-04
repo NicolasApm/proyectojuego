@@ -9,4 +9,6 @@ public interface ListaDispositivosView {
     void askEnableBT();
 
     void setData(List<String> data);
+
+
 }

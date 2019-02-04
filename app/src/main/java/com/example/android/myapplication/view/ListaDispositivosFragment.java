@@ -3,6 +3,8 @@ package com.example.android.myapplication.view;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,10 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.myapplication.R;
+import com.example.android.myapplication.devices.BTUtil;
+import com.example.android.myapplication.presenter.ConectarBluetoothPresenter;
 import com.example.android.myapplication.presenter.ListaDispositivosPresenter;
 import com.example.android.myapplication.presenter.ListaDispositivosPresenterImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import OpenHelper.Sqlite_OpenHelper;
+import OpenHelper.Usuarios;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,27 +46,26 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
     ListView IdLista;
     // String que se enviara a la actividad principal, mainactivity
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
+    public static String EXTRA_FIND = "EXTRA_FIND";
 
     // Declaracion de campos
     //private BluetoothAdapter mBtAdapter;
     private ArrayAdapter mPairedDevicesArrayAdapter;
     private OnFragmentInteractionListener mListener;
     private ListaDispositivosPresenter presenter;
+    private ArrayList<Usuarios> usuarios = new ArrayList<>();
+    private String findAgeUser;
+    private BTUtil btUtil;
+    Intent j;
+    ConectarBluetoothActivity  conectarBluetoothActivity;
+
 
 
     public ListaDispositivosFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Green_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
+       // TODO: Rename and change types and number of parameters
     public static ListaDispositivosFragment newInstance() {
         ListaDispositivosFragment fragment = new ListaDispositivosFragment();
         /*Bundle args = new Bundle();
@@ -75,8 +82,6 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
         /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
-
         }
 */
 
@@ -93,7 +98,11 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        try {
+            btUtil.VerificarEstadoBT();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         View v = inflater.inflate(R.layout.fragment_listadispositivos, container, false);
         IdLista = (ListView)v.findViewById(R.id.IdLista);
@@ -122,6 +131,7 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
     public void onResume () {
         super.onResume();
         presenter.onResume();
+
     }
 
     private void initRecyclerView(){
@@ -141,8 +151,10 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
 
             // Realiza un intent para iniciar la siguiente actividad
             // mientras toma un EXTRA_DEVICE_ADDRESS que es la dirección MAC.
-            Intent j = new Intent(getActivity(), ConectarBluetoothActivity.class);
+            j = new Intent(getActivity(), ConectarBluetoothActivity.class);
             j.putExtra(EXTRA_DEVICE_ADDRESS, address);
+            find();
+
             //Intent i = new Intent(getActivity(), UserInterfaz.class);//<-<- PARTE A MODIFICAR >->->
             startActivity(j);
         }
@@ -187,5 +199,28 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void find(){
+
+        ConectarBluetoothView conectarBluetoothView = null;
+        Sqlite_OpenHelper bh = new Sqlite_OpenHelper(getActivity(),"usuario",null,1);
+        if(bh!=null){
+            SQLiteDatabase db = bh.getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM usuario WHERE _ID = (SELECT MAX(_ID) FROM usuario)",null);
+
+            if(c.moveToFirst()){
+                do{
+                    usuarios.add(new Usuarios(c.getInt(0),c.getString(1),c.getString(2),c.getString(3)));
+
+                }while(c.moveToNext());
+
+                findAgeUser =usuarios.get(0).getEdad();
+
+                j.putExtra(EXTRA_FIND,findAgeUser);
+                //Log.d("pruebafind", findAgeUser);
+            }
+
+        }
     }
 }

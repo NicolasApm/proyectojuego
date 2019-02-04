@@ -1,13 +1,29 @@
 package com.example.android.myapplication.presenter;
 
+import android.content.Intent;
+
+import com.example.android.myapplication.common.EBotones;
+import com.example.android.myapplication.common.ENnum;
 import com.example.android.myapplication.devices.BTCallback;
 import com.example.android.myapplication.devices.BTUtil;
+import com.example.android.myapplication.model.GameNumSequence;
+import com.example.android.myapplication.model.GameSequence;
+import com.example.android.myapplication.model.Niv6_7Secuence;
+import com.example.android.myapplication.model.SecuenciaNiv5;
 import com.example.android.myapplication.view.ConectarBluetoothView;
+import com.example.android.myapplication.view.GameActivity;
+import com.example.android.myapplication.view.GameSecNumActivity;
+import com.example.android.myapplication.view.ListaDispositivosFragment;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresenter, BTCallback {
     private ConectarBluetoothView view;
-    private String address;
+    private String address,data;
     private BTUtil btUtil;
+
 
     public ConectarBluetoothPresenterImpl(ConectarBluetoothView view, String address) {
         this.view = view;
@@ -17,6 +33,7 @@ public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresente
 
     @Override
     public void onResume() {
+
         try {
             boolean btStatus = btUtil.VerificarEstadoBT();
             if(!btStatus)
@@ -32,7 +49,10 @@ public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresente
      */
     @Override
     public void encender() {
+
+
         btUtil.write("1");
+
     }
 
     @Override
@@ -47,9 +67,17 @@ public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresente
     }
 
     @Override
+    public void OnPause() {
+
+    }
+
+
+    @Override
     public void onNext(String data) {
+        this.data=data;
         view.showData(data);
     }
+
 
     @Override
     public void onError(Exception e) {
@@ -59,4 +87,8 @@ public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresente
         });
 
     }
+
+
+
+
 }

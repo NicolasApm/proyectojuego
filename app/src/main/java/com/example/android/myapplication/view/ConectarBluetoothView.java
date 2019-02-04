@@ -12,4 +12,6 @@ public interface ConectarBluetoothView {
     void RunOnMain(Runnable action);
 
     void finish();
+
+
 }

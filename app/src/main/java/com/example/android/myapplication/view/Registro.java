@@ -23,6 +23,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import OpenHelper.Sqlite_OpenHelper;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +46,7 @@ public class Registro extends Fragment {
     private SecuenciaNiv5 secuenciaNiv5 = new SecuenciaNiv5(sequence);
     private List<ENnum> sequence2 = new ArrayList<>();
     private Niv6_7Secuence secuenciaNiv67 =new Niv6_7Secuence(sequence2);
+
 
     // secuenciaNiv5 = new SecuenciaNiv5(sequence);
     // TODO: Rename and change types of parameters
@@ -104,14 +107,12 @@ public class Registro extends Fragment {
             @Override
             public void onClick(View v) {
 
-                /*
                 Sqlite_OpenHelper helper=new Sqlite_OpenHelper(getActivity(),"usuario",null,1);
                 helper.abrirdb();
                 helper.insertarReg(String.valueOf(txtNomusu.getText()),
                 String.valueOf(txtApellidousu.getText()),
                 String.valueOf(txtEdadusu.getText()));
                 helper.cerrardb();
-                */
             }
         });
 

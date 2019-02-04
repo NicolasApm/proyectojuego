@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="4"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="50dp"
     tools:context=".view.GameActivity">
 
     <LinearLayout
@@ -142,4 +140,17 @@
             android:layout_weight="1"
             style="@style/TeclaRedondo"/>
     </LinearLayout>
- </LinearLayout>
+
+    <Button
+        android:layout_margin="50dp"
+        android:id="@+id/comp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:text="COMPARAR"
+        android:textColor="@color/Rojo"
+        android:textSize="40dp"/>
+
+</LinearLayout>

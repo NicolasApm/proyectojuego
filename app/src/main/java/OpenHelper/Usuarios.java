@@ -37,7 +37,7 @@ public class Usuarios {
     }
 
     public String getEdad() {
-        return nombre;
+        return edad;
     }
 
    public void setEdad(String edad) {

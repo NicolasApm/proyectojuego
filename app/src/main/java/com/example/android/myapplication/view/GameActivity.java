@@ -1,9 +1,11 @@
 package com.example.android.myapplication.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.android.myapplication.R;
 import com.example.android.myapplication.common.EBotones;
@@ -14,10 +16,12 @@ import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class GameActivity extends AppCompatActivity implements GameView{
 
     public static final String SEQUENCE = "SEQ";
+    public static final String DataCompareRv = "DataNull";
 
     @BindView(R.id.btn11)
     Button btn11;
@@ -80,7 +84,6 @@ public class GameActivity extends AppCompatActivity implements GameView{
         //leer los extras
         String data = getIntent().getStringExtra(SEQUENCE);
         GameSequence gs = new Gson().fromJson(data, GameSequence.class);
-
         presenter = new GamePresenterImpl(this, gs);
 
     }
@@ -116,7 +119,7 @@ public class GameActivity extends AppCompatActivity implements GameView{
             getButtonFromEnum(EBotones.BUTTON43).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
             getButtonFromEnum(EBotones.BUTTON44).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
 
-        }
+            }
     }
     //Encender los botones
     @Override
@@ -138,6 +141,22 @@ public class GameActivity extends AppCompatActivity implements GameView{
         if (btn==EBotones.BUTTON43){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo43));}
         if (btn==EBotones.BUTTON44){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo44));}
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @OnClick(R.id.comp)
+    public void Comparar() {
+          Intent DataCmp;
+          String xxx="xxx";
+          DataCmp = new Intent(this, ConectarBluetoothActivity.class);
+          DataCmp.putExtra(DataCompareRv, xxx);
+          startActivity(DataCmp);
+
+     }
+
 
     Button getButtonFromEnum(EBotones btn) {
         switch (btn) {

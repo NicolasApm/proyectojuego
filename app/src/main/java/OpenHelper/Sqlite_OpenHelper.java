@@ -63,4 +63,6 @@ public class Sqlite_OpenHelper extends SQLiteOpenHelper {
                 "Nombre like '"+usu+"' and Apellido like '" +Ape+"'",null,null,null,null);
         return mcursor;
     }
+
+
 }
