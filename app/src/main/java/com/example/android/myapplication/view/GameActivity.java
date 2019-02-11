@@ -18,10 +18,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GameActivity extends AppCompatActivity implements GameView{
+public class GameActivity extends AppCompatActivity implements GameView,ConectarBluetoothView{
 
     public static final String SEQUENCE = "SEQ";
     public static final String DataCompareRv = "DataNull";
+    Intent i, j;
 
     @BindView(R.id.btn11)
     Button btn11;
@@ -194,5 +195,21 @@ public class GameActivity extends AppCompatActivity implements GameView{
             default:
                 return btn44;
         }
+    }
+
+    @Override
+    public void showData(String data) {
+
+    }
+
+    @Override
+    public void showMessage(String message) {
+
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void RunOnMain(Runnable action) {
+        runOnUiThread(action);
     }
 }

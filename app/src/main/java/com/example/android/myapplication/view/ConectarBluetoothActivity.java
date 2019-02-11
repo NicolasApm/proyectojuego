@@ -38,15 +38,13 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
     private SecuenciaNiv5 secuenciaNiv5 = new SecuenciaNiv5(sequence);
     private List<ENnum> sequence2 = new ArrayList<>();
     private Niv6_7Secuence secuenciaNiv67 = new Niv6_7Secuence(sequence2);
-    private String findAgeUser,data,CompareDataRvr;
-
+    private String findAgeUser, data, CompareDataRvr;
 
 
     @BindView(R.id.IdBufferIn)
     TextView IdBufferIn;
 
     Intent i, j;
-
 
 
     @Override
@@ -62,10 +60,10 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
         //
 
         String address = intent.getStringExtra(ListaDispositivosFragment.EXTRA_DEVICE_ADDRESS);
-        CompareDataRvr = intent.getStringExtra(GameActivity.DataCompareRv);
+        //CompareDataRvr = intent.getStringExtra(GameActivity.DataCompareRv);
         findAgeUser = intent.getStringExtra(ListaDispositivosFragment.EXTRA_FIND);
         presenter = new ConectarBluetoothPresenterImpl(this, address);
-
+        //presenter.onResume();
 
     }
 
@@ -77,6 +75,7 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
 
     }
 
+    @Override
     protected void onPause() {
 
         super.onPause();
@@ -86,19 +85,27 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
     }
 
 
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        //presenter.onResume();
+        finish();
+    }
+
 
     @OnClick(R.id.IdEncender)
     void encender() {
 
-        int findAgeUserInt=Integer.parseInt(findAgeUser);
+        int findAgeUserInt = Integer.parseInt(findAgeUser);
 
-         if (findAgeUserInt>=5) {
+        if (findAgeUserInt >= 5) {
 
-             //Toast.makeText(getBaseContext(), findAgeUser, Toast.LENGTH_SHORT).show();
-             secuenciaNiv5.CuartaSec();
-             CallGame();
-             sequence.clear();
-         }
+            //Toast.makeText(getBaseContext(), findAgeUser, Toast.LENGTH_SHORT).show();
+            secuenciaNiv5.CuartaSec();
+            CallGame();
+            sequence.clear();
+        }
 
         //else if
 
@@ -119,7 +126,7 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
 
         }
 */
-     presenter.encender();
+        presenter.encender();
     }
 
     @OnClick(R.id.IdApagar)
@@ -135,7 +142,7 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
 
     @Override
     public void showData(String data) {
-        this.data=data;
+        this.data = data;
 
         //IdBufferIn.setText("Dato: " + data);//<-<- PARTE A MODIFICAR >->->
 
@@ -160,7 +167,7 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
         runOnUiThread(action);
     }
 
-      public void CallGame() {
+    public void CallGame() {
 
         GameSequence seq = new GameSequence();
         seq.setSequence(sequence);
@@ -169,6 +176,7 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
 
         i.putExtra(GameActivity.SEQUENCE, tx);
         startActivity(i);
+
     }
 
     public void CallGame2() {
@@ -181,8 +189,6 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
         j.putExtra(GameSecNumActivity.SEQUENCE, tx);
         startActivity(j);
     }
-
-
 
 
 }

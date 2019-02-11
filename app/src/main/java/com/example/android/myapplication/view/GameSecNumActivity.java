@@ -20,13 +20,13 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GameSecNumActivity extends AppCompatActivity implements GameSecNumView,MenuUcc.OnFragmentInteractionListener {
+public class GameSecNumActivity extends AppCompatActivity implements GameSecNumView,MenuUcc_Fragment.OnFragmentInteractionListener {
 
     public static final String SEQUENCE = "SEQ";
     static Random RandonGenerator = new Random();
     static int randomInteger = 0, cont = 0, Rand1 = 0, Rand2 = 0, Rand3 = 0,Rand4 = 0,Rand5 = 0;
     static String Randstg;
-    MenuUcc menuUcc;
+    MenuUcc_Fragment fragmentMenuUcc;
 
     @BindView(R.id.Txtv11)
     TextView txtv11;
@@ -121,8 +121,8 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
         //if
 
         FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
-        menuUcc=new MenuUcc();
-        fragmentTransaction.replace(R.id.ContenedorNiv,menuUcc);
+        fragmentMenuUcc =new MenuUcc_Fragment();
+        fragmentTransaction.replace(R.id.ContenedorNiv, fragmentMenuUcc);
         fragmentTransaction.commit();
 
     }

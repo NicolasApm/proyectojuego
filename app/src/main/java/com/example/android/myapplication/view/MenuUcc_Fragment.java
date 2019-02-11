@@ -14,12 +14,12 @@ import com.example.android.myapplication.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MenuUcc.OnFragmentInteractionListener} interface
+ * {@link MenuUcc_Fragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MenuUcc#newInstance} factory method to
+ * Use the {@link MenuUcc_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuUcc extends Fragment {
+public class MenuUcc_Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +31,7 @@ public class MenuUcc extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public MenuUcc() {
+    public MenuUcc_Fragment() {
         // Required empty public constructor
     }
 
@@ -41,11 +41,11 @@ public class MenuUcc extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MenuUcc.
+     * @return A new instance of fragment MenuUcc_Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuUcc newInstance(String param1, String param2) {
-        MenuUcc fragment = new MenuUcc();
+    public static MenuUcc_Fragment newInstance(String param1, String param2) {
+        MenuUcc_Fragment fragment = new MenuUcc_Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

@@ -20,10 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.GameActivity"></activity>
-        <activity android:name=".view.ConectarBluetoothActivity"></activity>
-        <activity android:name=".view.GameSecNumActivity"></activity>
-
+        <activity android:name=".view.GameActivity" />
+        <activity android:name=".view.ConectarBluetoothActivity" />
+        <activity android:name=".view.GameSecNumActivity" />
+        <activity android:name=".view.InitGameActivity"></activity>
     </application>
 
 </manifest>

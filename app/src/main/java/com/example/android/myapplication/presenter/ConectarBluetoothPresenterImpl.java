@@ -16,6 +16,7 @@ import com.example.android.myapplication.view.GameSecNumActivity;
 import com.example.android.myapplication.view.ListaDispositivosFragment;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +70,12 @@ public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresente
     @Override
     public void OnPause() {
 
+        try { // Cuando se sale de la aplicación esta parte permite
+            // que no se deje abierto el socket
+            btUtil.close();
+        } catch (Exception e2) {
+            view.showMessage("error");
+        }
     }
 
 
@@ -87,8 +94,4 @@ public class ConectarBluetoothPresenterImpl implements ConectarBluetoothPresente
         });
 
     }
-
-
-
-
 }

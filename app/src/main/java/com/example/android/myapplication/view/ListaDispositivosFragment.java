@@ -151,8 +151,8 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
 
             // Realiza un intent para iniciar la siguiente actividad
             // mientras toma un EXTRA_DEVICE_ADDRESS que es la dirección MAC.
-            j = new Intent(getActivity(), ConectarBluetoothActivity.class);
-            j.putExtra(EXTRA_DEVICE_ADDRESS, address);
+            j = new Intent(getActivity(), InitGameActivity.class);
+            //j.putExtra(EXTRA_DEVICE_ADDRESS, address);
             find();
 
             //Intent i = new Intent(getActivity(), UserInterfaz.class);//<-<- PARTE A MODIFICAR >->->

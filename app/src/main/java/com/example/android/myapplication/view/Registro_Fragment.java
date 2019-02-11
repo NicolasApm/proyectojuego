@@ -29,23 +29,23 @@ import OpenHelper.Sqlite_OpenHelper;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Registro.OnFragmentInteractionListener} interface
+ * {@link Registro_Fragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Registro#newInstance} factory method to
+ * Use the {@link Registro_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Registro extends Fragment {
+public class Registro_Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Button btnGrabarUsu, btnPrueba1, btnPrueba2, btnPrueba3, btnPrueba4, btnPrueba5;
-    Intent i,j;
+    Intent i, j;
     public EditText txtNomusu, txtApellidousu, txtEdadusu;
     private List<EBotones> sequence = new ArrayList<>();
     private SecuenciaNiv5 secuenciaNiv5 = new SecuenciaNiv5(sequence);
     private List<ENnum> sequence2 = new ArrayList<>();
-    private Niv6_7Secuence secuenciaNiv67 =new Niv6_7Secuence(sequence2);
+    private Niv6_7Secuence secuenciaNiv67 = new Niv6_7Secuence(sequence2);
 
 
     // secuenciaNiv5 = new SecuenciaNiv5(sequence);
@@ -55,7 +55,7 @@ public class Registro extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Registro() {
+    public Registro_Fragment() {
         // Required empty public constructor
     }
 
@@ -65,11 +65,11 @@ public class Registro extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Registro.
+     * @return A new instance of fragment Registro_Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Registro newInstance(String param1, String param2) {
-        Registro fragment = new Registro();
+    public static Registro_Fragment newInstance(String param1, String param2) {
+        Registro_Fragment fragment = new Registro_Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -107,11 +107,11 @@ public class Registro extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Sqlite_OpenHelper helper=new Sqlite_OpenHelper(getActivity(),"usuario",null,1);
+                Sqlite_OpenHelper helper = new Sqlite_OpenHelper(getActivity(), "usuario", null, 1);
                 helper.abrirdb();
                 helper.insertarReg(String.valueOf(txtNomusu.getText()),
-                String.valueOf(txtApellidousu.getText()),
-                String.valueOf(txtEdadusu.getText()));
+                        String.valueOf(txtApellidousu.getText()),
+                        String.valueOf(txtEdadusu.getText()));
                 helper.cerrardb();
             }
         });

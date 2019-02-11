@@ -90,7 +90,7 @@ public class BTUtil {
 
     public void connect(BluetoothDevice device, BTCallback cb) throws IOException {
         this.cb = cb;
-        if (btSocket == null)
+       /* if (btSocket == null)
             btSocket = createBluetoothSocket(device);
         // Establece la conexión con el socket Bluetooth.
         try {
@@ -105,7 +105,23 @@ public class BTUtil {
                 throw e2;
             }
             throw e;
+        }*/
+        try {
+            btSocket = createBluetoothSocket(device);
+        } catch (IOException e) {
+            //Toast.makeText(, "La creacción del Socket fallo", Toast.LENGTH_LONG).show();
         }
+        // Establece la conexión con el socket Bluetooth.
+        try {
+            btSocket.connect();
+        } catch (IOException e) {
+            try {
+                btSocket.close();
+            } catch (IOException e2) {
+            }
+        }
+        MyConexionBT = new ConnectedThread(btSocket);
+        MyConexionBT.start();
     }
 
     public void close() {

@@ -12,14 +12,14 @@ import android.widget.TextView;
 import com.example.android.myapplication.R;
 
 public class MainActivity extends AppCompatActivity implements
-        Registro.OnFragmentInteractionListener,
-        MenuUcc.OnFragmentInteractionListener,
+        Registro_Fragment.OnFragmentInteractionListener,
+        MenuUcc_Fragment.OnFragmentInteractionListener,
         ListaDispositivosFragment.OnFragmentInteractionListener
 {
 
     private TextView mTextMessage;
-    Registro registro;
-    MenuUcc menuUcc;
+    Registro_Fragment fragmentRegistro;
+    MenuUcc_Fragment fragmentMenuUcc;
     ListaDispositivosFragment listaDispositivosFragment;
 
        @Override
@@ -41,14 +41,14 @@ public class MainActivity extends AppCompatActivity implements
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    menuUcc=new MenuUcc();
-                    fragmentTransaction.replace(R.id.ContenedorFragmentos,menuUcc);
+                    fragmentMenuUcc =new MenuUcc_Fragment();
+                    fragmentTransaction.replace(R.id.ContenedorFragmentos, fragmentMenuUcc);
                     fragmentTransaction.commit();
 
                     return true;
                 case R.id.navigation_dashboard:
-                    registro =new Registro();
-                    fragmentTransaction.replace(R.id.ContenedorFragmentos, registro);
+                    fragmentRegistro =new Registro_Fragment();
+                    fragmentTransaction.replace(R.id.ContenedorFragmentos, fragmentRegistro);
                     fragmentTransaction.commit();
                     return true;
 
