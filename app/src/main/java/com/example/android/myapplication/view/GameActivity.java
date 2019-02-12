@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.example.android.myapplication.R;
 import com.example.android.myapplication.common.EBotones;
 import com.example.android.myapplication.model.GameSequence;
+import com.example.android.myapplication.presenter.ConectarBluetoothPresenter;
+import com.example.android.myapplication.presenter.ConectarBluetoothPresenterImpl;
 import com.example.android.myapplication.presenter.GamePresenter;
 import com.example.android.myapplication.presenter.GamePresenterImpl;
 import com.google.gson.Gson;
@@ -18,10 +20,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GameActivity extends AppCompatActivity implements GameView,ConectarBluetoothView{
+public class GameActivity extends AppCompatActivity implements GameView, ConectarBluetoothView {
 
     public static final String SEQUENCE = "SEQ";
     public static final String DataCompareRv = "DataNull";
+    private ConectarBluetoothPresenter conectarBluetoothPresenter;
+
     Intent i, j;
 
     @BindView(R.id.btn11)
@@ -61,6 +65,8 @@ public class GameActivity extends AppCompatActivity implements GameView,Conectar
     Button btn44;
 
     private GamePresenter presenter;
+    public static String EXTRA_DEVICE_ADDRESS = "device_address";
+    private String data;
 
     //Funcion para oprimir botones y saber posicion
    /* private View.OnClickListener clickbutton = new View.OnClickListener() {
@@ -81,22 +87,29 @@ public class GameActivity extends AppCompatActivity implements GameView,Conectar
         setContentView(R.layout.activity_game);
         //Para implementar botones en el layout
         ButterKnife.bind(this);
-       // configOnClick();
+        // configOnClick();
         //leer los extras
+        Intent intent = getIntent();
+        String address = intent.getStringExtra(EXTRA_DEVICE_ADDRESS);
         String data = getIntent().getStringExtra(SEQUENCE);
         GameSequence gs = new Gson().fromJson(data, GameSequence.class);
         presenter = new GamePresenterImpl(this, gs);
+        //Consigue la direccion MAC desde DeviceListActivity via EXTRA
 
+        conectarBluetoothPresenter = new ConectarBluetoothPresenterImpl(this, address);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         presenter.start();
+        conectarBluetoothPresenter.onResume();
     }
-   //Apagar boton por boton
-    public void offButton (EBotones btn) {
-    // getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
+
+
+    //Apagar boton por boton
+    public void offButton(EBotones btn) {
+        // getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
     }
 
     @Override
@@ -120,43 +133,83 @@ public class GameActivity extends AppCompatActivity implements GameView,Conectar
             getButtonFromEnum(EBotones.BUTTON43).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
             getButtonFromEnum(EBotones.BUTTON44).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
 
-            }
+        }
     }
+
     //Encender los botones
     @Override
     public void onButton(EBotones btn) {
-        if (btn==EBotones.BUTTON11){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo11));}
-        if (btn==EBotones.BUTTON12){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo12));}
-        if (btn==EBotones.BUTTON13){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo13));}
-        if (btn==EBotones.BUTTON14){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo14));}
-        if (btn==EBotones.BUTTON21){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo21));}
-        if (btn==EBotones.BUTTON22){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo22));}
-        if (btn==EBotones.BUTTON23){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo23));}
-        if (btn==EBotones.BUTTON24){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo24));}
-        if (btn==EBotones.BUTTON31){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo31));}
-        if (btn==EBotones.BUTTON32){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo32));}
-        if (btn==EBotones.BUTTON33){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo33));}
-        if (btn==EBotones.BUTTON34){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo34));}
-        if (btn==EBotones.BUTTON41){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo41));}
-        if (btn==EBotones.BUTTON42){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo42));}
-        if (btn==EBotones.BUTTON43){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo43));}
-        if (btn==EBotones.BUTTON44){getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo44));}
+        if (btn == EBotones.BUTTON11) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo11));
+        }
+        if (btn == EBotones.BUTTON12) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo12));
+        }
+        if (btn == EBotones.BUTTON13) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo13));
+        }
+        if (btn == EBotones.BUTTON14) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo14));
+        }
+        if (btn == EBotones.BUTTON21) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo21));
+        }
+        if (btn == EBotones.BUTTON22) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo22));
+        }
+        if (btn == EBotones.BUTTON23) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo23));
+        }
+        if (btn == EBotones.BUTTON24) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo24));
+        }
+        if (btn == EBotones.BUTTON31) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo31));
+        }
+        if (btn == EBotones.BUTTON32) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo32));
+        }
+        if (btn == EBotones.BUTTON33) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo33));
+        }
+        if (btn == EBotones.BUTTON34) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo34));
+        }
+        if (btn == EBotones.BUTTON41) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo41));
+        }
+        if (btn == EBotones.BUTTON42) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo42));
+        }
+        if (btn == EBotones.BUTTON43) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo43));
+        }
+        if (btn == EBotones.BUTTON44) {
+            getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo44));
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        conectarBluetoothPresenter.OnPause();
     }
 
     @OnClick(R.id.comp)
     public void Comparar() {
-          Intent DataCmp;
-          String xxx="xxx";
-          DataCmp = new Intent(this, ConectarBluetoothActivity.class);
-          DataCmp.putExtra(DataCompareRv, xxx);
-          startActivity(DataCmp);
 
-     }
+        conectarBluetoothPresenter.encender();
+
+        if (data.equals("LED ENCENDIDO")) {
+
+
+        }
+    }
+
+    @OnClick(R.id.niv1)
+    public void niv1() {
+        conectarBluetoothPresenter.apagar();
+    }
 
 
     Button getButtonFromEnum(EBotones btn) {
@@ -200,6 +253,7 @@ public class GameActivity extends AppCompatActivity implements GameView,Conectar
     @Override
     public void showData(String data) {
 
+        this.data = data;
     }
 
     @Override

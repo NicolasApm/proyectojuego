@@ -29,6 +29,8 @@ public class InitGameActivity extends AppCompatActivity {
     private List<ENnum> sequence2 = new ArrayList<>();
     private Niv6_7Secuence secuenciaNiv67 = new Niv6_7Secuence(sequence2);
     private String findAgeUser;
+    public static String EXTRA_DEVICE_ADDRESS = "device_address";
+    private String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,13 @@ public class InitGameActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         i = new Intent(this, GameActivity.class);
         j = new Intent(this, GameSecNumActivity.class);
+
         Intent intent = getIntent();
         findAgeUser = intent.getStringExtra(ListaDispositivosFragment.EXTRA_FIND);
+        address = intent.getStringExtra(ListaDispositivosFragment.EXTRA_DEVICE_ADDRESS);
 
     }
+
 
     @OnClick(R.id.prutng)
     public void InitGameLVL() {
@@ -75,9 +80,6 @@ public class InitGameActivity extends AppCompatActivity {
             sequence2.clear();
         }
 
-
-
-
     }
 
     public void CallGame() {
@@ -88,6 +90,7 @@ public class InitGameActivity extends AppCompatActivity {
         String tx = new Gson().toJson(seq);
 
         i.putExtra(GameActivity.SEQUENCE, tx);
+        i.putExtra(EXTRA_DEVICE_ADDRESS, address);
         startActivity(i);
     }
 
@@ -99,6 +102,7 @@ public class InitGameActivity extends AppCompatActivity {
         String tx = new Gson().toJson(seq);
 
         j.putExtra(GameSecNumActivity.SEQUENCE, tx);
+        j.putExtra(EXTRA_DEVICE_ADDRESS, address);
         startActivity(j);
     }
 

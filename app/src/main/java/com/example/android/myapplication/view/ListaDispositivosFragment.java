@@ -56,7 +56,7 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
     private ArrayList<Usuarios> usuarios = new ArrayList<>();
     private String findAgeUser;
     private BTUtil btUtil;
-    Intent j;
+    Intent j,k;
     ConectarBluetoothActivity  conectarBluetoothActivity;
 
 
@@ -152,7 +152,8 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
             // Realiza un intent para iniciar la siguiente actividad
             // mientras toma un EXTRA_DEVICE_ADDRESS que es la dirección MAC.
             j = new Intent(getActivity(), InitGameActivity.class);
-            //j.putExtra(EXTRA_DEVICE_ADDRESS, address);
+            //k = new Intent(getActivity(), InitGameActivity.class);
+            j.putExtra(EXTRA_DEVICE_ADDRESS, address);
             find();
 
             //Intent i = new Intent(getActivity(), UserInterfaz.class);//<-<- PARTE A MODIFICAR >->->

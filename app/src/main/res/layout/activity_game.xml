@@ -142,7 +142,7 @@
     </LinearLayout>
 
     <Button
-        android:layout_margin="50dp"
+        android:layout_margin="10dp"
         android:id="@+id/comp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -151,6 +151,18 @@
         android:textAllCaps="false"
         android:text="COMPARAR"
         android:textColor="@color/Rojo"
-        android:textSize="40dp"/>
+        android:textSize="20dp"/>
+
+    <Button
+        android:layout_margin="10dp"
+        android:id="@+id/niv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:text="COMPARAR"
+        android:textColor="@color/Rojo"
+        android:textSize="20dp"/>
 
 </LinearLayout>

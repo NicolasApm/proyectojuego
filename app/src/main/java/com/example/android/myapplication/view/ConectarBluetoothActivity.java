@@ -146,7 +146,7 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
 
         //IdBufferIn.setText("Dato: " + data);//<-<- PARTE A MODIFICAR >->->
 
-        /*if (data.equals("LED ENCENDIDO")){
+      /*  if (data.equals("LED ENCENDIDO")){
 
              IdBufferIn.setText("Dato: " + "inciaLed");
         }
