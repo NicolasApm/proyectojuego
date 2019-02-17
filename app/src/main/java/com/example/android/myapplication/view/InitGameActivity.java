@@ -28,9 +28,9 @@ public class InitGameActivity extends AppCompatActivity {
     private SecuenciaNiv5 secuenciaNiv5 = new SecuenciaNiv5(sequence);
     private List<ENnum> sequence2 = new ArrayList<>();
     private Niv6_7Secuence secuenciaNiv67 = new Niv6_7Secuence(sequence2);
-    private String findAgeUser;
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
     private String address;
+    private String findAgeUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,20 @@ public class InitGameActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         i = new Intent(this, GameActivity.class);
         j = new Intent(this, GameSecNumActivity.class);
-
         Intent intent = getIntent();
         findAgeUser = intent.getStringExtra(ListaDispositivosFragment.EXTRA_FIND);
         address = intent.getStringExtra(ListaDispositivosFragment.EXTRA_DEVICE_ADDRESS);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Intent intent = getIntent();
+        findAgeUser = intent.getStringExtra(ListaDispositivosFragment.EXTRA_FIND);
+        address = intent.getStringExtra(ListaDispositivosFragment.EXTRA_DEVICE_ADDRESS);
     }
 
 

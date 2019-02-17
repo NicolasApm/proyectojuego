@@ -24,8 +24,7 @@
         <TextView
             android:id="@+id/Txtv12"
             android:text="2"
-            android:textStyle="bold"
-            android:textSize="90sp"></TextView>
+            android:visibility="visible"></TextView>
 
         <TextView
             android:id="@+id/Txtv13"

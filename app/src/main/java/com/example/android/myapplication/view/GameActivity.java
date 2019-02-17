@@ -1,10 +1,13 @@
 package com.example.android.myapplication.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.myapplication.R;
@@ -23,8 +26,12 @@ import butterknife.OnClick;
 public class GameActivity extends AppCompatActivity implements GameView, ConectarBluetoothView {
 
     public static final String SEQUENCE = "SEQ";
-    public static final String DataCompareRv = "DataNull";
     private ConectarBluetoothPresenter conectarBluetoothPresenter;
+    public static String EXTRA_NIVEL = "LVL";
+
+
+    @BindView(R.id.textView2)
+    TextView textView2;
 
     Intent i, j;
 
@@ -90,6 +97,7 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
         // configOnClick();
         //leer los extras
         Intent intent = getIntent();
+        i = new Intent(this, InitGameActivity.class);
         String address = intent.getStringExtra(EXTRA_DEVICE_ADDRESS);
         String data = getIntent().getStringExtra(SEQUENCE);
         GameSequence gs = new Gson().fromJson(data, GameSequence.class);
@@ -132,8 +140,9 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
             getButtonFromEnum(EBotones.BUTTON42).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
             getButtonFromEnum(EBotones.BUTTON43).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
             getButtonFromEnum(EBotones.BUTTON44).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
-
         }
+        conectarBluetoothPresenter.encender();
+
     }
 
     //Encender los botones
@@ -187,6 +196,7 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
         if (btn == EBotones.BUTTON44) {
             getButtonFromEnum(btn).setBackground(getResources().getDrawable(R.drawable.boton_redondo44));
         }
+
     }
 
     @Override
@@ -195,22 +205,10 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
         conectarBluetoothPresenter.OnPause();
     }
 
-    @OnClick(R.id.comp)
-    public void Comparar() {
-
-        conectarBluetoothPresenter.encender();
-
-        if (data.equals("LED ENCENDIDO")) {
-
-
-        }
-    }
-
     @OnClick(R.id.niv1)
     public void niv1() {
         conectarBluetoothPresenter.apagar();
     }
-
 
     Button getButtonFromEnum(EBotones btn) {
         switch (btn) {
@@ -254,6 +252,25 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
     public void showData(String data) {
 
         this.data = data;
+        String LVL="";
+
+        textView2.setText("Dato: " + data);
+        //  Log.e("hello", data);
+        if (data.equals("NIV1OK")) {
+            LVL="NIV1OK";
+            Toast.makeText(this, "Acertaste", Toast.LENGTH_LONG).show();
+            // Log.e("hello", data);
+
+            i.putExtra(EXTRA_NIVEL, LVL);
+            startActivity(i);
+
+        }
+
+
+
+
+
+
     }
 
     @Override
@@ -261,9 +278,20 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
 
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
     }
-
     @Override
     public void RunOnMain(Runnable action) {
         runOnUiThread(action);
+    }
+
+    @OnClick(R.id.comp)
+    public void Comparar() {
+
+        conectarBluetoothPresenter.encender();
+
+       /*  if (data.equals("LED ENCENDIDO")) {
+
+       // Toast.makeText(this, "hi", Toast.LENGTH_LONG).show();
+             Log.e("hello", data);
+        }*/
     }
 }

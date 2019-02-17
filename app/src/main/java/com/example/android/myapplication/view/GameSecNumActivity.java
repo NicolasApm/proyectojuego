@@ -67,15 +67,11 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
         setContentView(R.layout.fragment_niveles6_7);
         //Para implementar botones en el layout
         ButterKnife.bind(this);
-
         // configOnClick();
         //leer los extras
         String data = getIntent().getStringExtra(SEQUENCE);
         GameNumSequence gs = new Gson().fromJson(data, GameNumSequence.class);
-
         presenter = new GameSecNumPresenterSecNumImpl(this, gs);
-
-
     }
 
     @Override
