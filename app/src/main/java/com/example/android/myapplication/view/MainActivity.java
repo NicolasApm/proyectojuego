@@ -47,13 +47,15 @@ public class MainActivity extends AppCompatActivity implements
 
                     return true;
                 case R.id.navigation_dashboard:
-                    registro =new Registro();
+                    registro = new Registro();
+                    if(listaDispositivosFragment!=null){
+                        registro.setBtAdress(listaDispositivosFragment.getAddress());
+                    }
                     fragmentTransaction.replace(R.id.ContenedorFragmentos, registro);
                     fragmentTransaction.commit();
                     return true;
 
                 case R.id.navigation_notifications:
-
                     listaDispositivosFragment = ListaDispositivosFragment.newInstance();
                     fragmentTransaction.replace(R.id.ContenedorFragmentos, listaDispositivosFragment);
                     fragmentTransaction.commit();

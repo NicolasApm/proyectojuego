@@ -44,7 +44,15 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
     private ArrayAdapter mPairedDevicesArrayAdapter;
     private OnFragmentInteractionListener mListener;
     private ListaDispositivosPresenter presenter;
+    private String address;
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public ListaDispositivosFragment() {
         // Required empty public constructor
@@ -141,10 +149,11 @@ public class ListaDispositivosFragment extends Fragment implements ListaDisposit
 
             // Realiza un intent para iniciar la siguiente actividad
             // mientras toma un EXTRA_DEVICE_ADDRESS que es la dirección MAC.
-            Intent j = new Intent(getActivity(), ConectarBluetoothActivity.class);
-            j.putExtra(EXTRA_DEVICE_ADDRESS, address);
+            // Intent j = new Intent(getActivity(), ConectarBluetoothActivity.class);
+            // j.putExtra(EXTRA_DEVICE_ADDRESS, address);
             //Intent i = new Intent(getActivity(), UserInterfaz.class);//<-<- PARTE A MODIFICAR >->->
-            startActivity(j);
+            // startActivity(j);
+            setAddress(address);
         }
     };
     @Override

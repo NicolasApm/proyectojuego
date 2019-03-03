@@ -1,18 +1,15 @@
 package com.example.android.myapplication.view;
 
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.myapplication.R;
 import com.example.android.myapplication.presenter.ConectarBluetoothPresenter;
 import com.example.android.myapplication.presenter.ConectarBluetoothPresenterImpl;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,8 +39,12 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
     protected void onResume() {
         super.onResume();
         presenter.onResume();
+    }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.desconectar();
     }
 
     @OnClick(R.id.IdEncender)
@@ -66,16 +67,14 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
         //this.data=data;
         //IdBufferIn.setText("Dato: " + data);//<-<- PARTE A MODIFICAR >->->
 
-        if (data.equals("LED ENCENDIDO")){
+        if (data.equals("LED ENCENDIDO")) {
 
-             IdBufferIn.setText("Dato: " + "inciaLed");
-        }
-        else if(data.equals("LED APAGADO")){
+            IdBufferIn.setText("Dato: " + "inciaLed");
+        } else if (data.equals("LED APAGADO")) {
 
             IdBufferIn.setText("Dato: " + "OFFLed");
         }
     }
-
 
 
     @Override
@@ -84,7 +83,7 @@ public class ConectarBluetoothActivity extends AppCompatActivity implements Cone
     }
 
     @Override
-    public void RunOnMain(Runnable action){
+    public void RunOnMain(Runnable action) {
         runOnUiThread(action);
     }
 }

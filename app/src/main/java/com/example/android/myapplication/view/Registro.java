@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.android.myapplication.R;
 import com.example.android.myapplication.common.EBotones;
@@ -38,12 +40,23 @@ public class Registro extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Button btnGrabarUsu, btnPrueba1, btnPrueba2, btnPrueba3, btnPrueba4, btnPrueba5;
-    Intent i,j;
+    Intent i, j;
     public EditText txtNomusu, txtApellidousu, txtEdadusu;
     private List<EBotones> sequence = new ArrayList<>();
     private SecuenciaNiv5 secuenciaNiv5 = new SecuenciaNiv5(sequence);
     private List<ENnum> sequence2 = new ArrayList<>();
-    private Niv6_7Secuence secuenciaNiv67 =new Niv6_7Secuence(sequence2);
+    private Niv6_7Secuence secuenciaNiv67 = new Niv6_7Secuence(sequence2);
+
+    public String getBtAdress() {
+        return btAdress;
+    }
+
+    public void setBtAdress(String btAdress) {
+        this.btAdress = btAdress;
+    }
+
+    private String btAdress;
+
 
     // secuenciaNiv5 = new SecuenciaNiv5(sequence);
     // TODO: Rename and change types of parameters
@@ -119,7 +132,6 @@ public class Registro extends Fragment {
         btnPrueba1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 secuenciaNiv5.PrimeraSec();
                 CallGame();
                 sequence.clear();
@@ -195,14 +207,18 @@ public class Registro extends Fragment {
     }
 
     public void CallGame() {
+        if (getBtAdress() != null) {
+            GameSequence seq = new GameSequence();
+            seq.setSequence(sequence);
 
-        GameSequence seq = new GameSequence();
-        seq.setSequence(sequence);
+            String tx = new Gson().toJson(seq);
 
-        String tx = new Gson().toJson(seq);
-
-        i.putExtra(GameActivity.SEQUENCE, tx);
-        startActivity(i);
+            i.putExtra(GameActivity.SEQUENCE, tx);
+            i.putExtra(GameActivity.BTADD, getBtAdress());
+            startActivity(i);
+        } else {
+            Log.d("nnnnnnnnnn", "Seleccione dispositivo BT primero");
+        }
     }
 
     public void CallGame2() {

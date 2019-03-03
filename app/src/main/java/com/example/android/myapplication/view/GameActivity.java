@@ -1,13 +1,16 @@
 package com.example.android.myapplication.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.android.myapplication.R;
 import com.example.android.myapplication.common.EBotones;
 import com.example.android.myapplication.model.GameSequence;
+import com.example.android.myapplication.presenter.ConectarBluetoothPresenterImpl;
 import com.example.android.myapplication.presenter.GamePresenter;
 import com.example.android.myapplication.presenter.GamePresenterImpl;
 import com.google.gson.Gson;
@@ -18,6 +21,7 @@ import butterknife.ButterKnife;
 public class GameActivity extends AppCompatActivity implements GameView{
 
     public static final String SEQUENCE = "SEQ";
+    public static final String BTADD = "BTADD";
 
     @BindView(R.id.btn11)
     Button btn11;
@@ -79,9 +83,13 @@ public class GameActivity extends AppCompatActivity implements GameView{
        // configOnClick();
         //leer los extras
         String data = getIntent().getStringExtra(SEQUENCE);
+        String address = getIntent().getStringExtra(BTADD);
         GameSequence gs = new Gson().fromJson(data, GameSequence.class);
-
-        presenter = new GamePresenterImpl(this, gs);
+        //Consigue la direccion MAC desde DeviceListActivity via EXTRA
+//        String address = getIntent().getStringExtra(ListaDispositivosFragment.EXTRA_DEVICE_ADDRESS);
+//        Log.d("nnnnnnnnnnnnnnnn", address);
+       // presenter = new ConectarBluetoothPresenterImpl(this, address);
+        presenter = new GamePresenterImpl(this, gs, address);
 
     }
 
